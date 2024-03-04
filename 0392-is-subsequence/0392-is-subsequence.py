@@ -2,7 +2,6 @@ class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
 
         i = 0
-        f = 0
 
         if not s:
             return True
@@ -11,7 +10,6 @@ class Solution:
 
             if s[i] == char:
                 i += 1
-                f = 1
                 if i == len(s):
                     return True
         return False
