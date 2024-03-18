@@ -7,7 +7,6 @@ class Solution:
         
         for right in range(len(s)):
             char_count[s[right]] = char_count.get(s[right], 0) + 1
-            #max_count = max(max_count, char_count[s[right]])
             
             # Check if the window size exceeds the maximum count plus k
             while( right - left + 1) - max (char_count.values()) > k:
