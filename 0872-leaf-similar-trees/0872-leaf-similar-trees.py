@@ -8,12 +8,11 @@ class Solution:
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
         def get_leaf_values(root,leaf):
             if not root:
-                #print(root.val)
                 return 
+
             if not root.left and not root.right:
                 leaf.append(root.val)
                 return [root.val]
-            #return get_leaf_values(root.left) + get_leaf_values(root.right)
             get_leaf_values(root.left,leaf)
             get_leaf_values(root.right,leaf)
           
