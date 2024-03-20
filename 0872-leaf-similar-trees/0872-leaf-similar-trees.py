@@ -6,14 +6,19 @@ class TreeNode:
 
 class Solution:
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
-        def get_leaf_values(root):
+        def get_leaf_values(root,leaf):
             if not root:
-                return []
+                #print(root.val)
+                return 
             if not root.left and not root.right:
+                leaf.append(root.val)
                 return [root.val]
-            return get_leaf_values(root.left) + get_leaf_values(root.right)
+            #return get_leaf_values(root.left) + get_leaf_values(root.right)
+            get_leaf_values(root.left,leaf)
+            get_leaf_values(root.right,leaf)
+          
+        leaf1, leaf2 = [],[]
+        get_leaf_values(root1,leaf1)
+        get_leaf_values(root2,leaf2)
         
-        leaf_values1 = get_leaf_values(root1)
-        leaf_values2 = get_leaf_values(root2)
-        
-        return leaf_values1 == leaf_values2
+        return leaf1 == leaf2
