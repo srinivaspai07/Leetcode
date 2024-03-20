@@ -1,20 +1,19 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
-    def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+    def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
+        def get_leaf_values(root):
+            if not root:
+                return []
+            if not root.left and not root.right:
+                return [root.val]
+            return get_leaf_values(root.left) + get_leaf_values(root.right)
         
-        def get_leaf_nodes(node, leaf_nodes):
-            if node is None:
-                return
-
-            if node.left is None and node.right is None:
-                leaf_nodes.append(node.val)
-
-            get_leaf_nodes(node.left, leaf_nodes)
-            get_leaf_nodes(node.right, leaf_nodes)
-
-        leaf_nodes1 = []
-        leaf_nodes2 = []
-
-        get_leaf_nodes(root1, leaf_nodes1)
-        get_leaf_nodes(root2, leaf_nodes2)
-
-        return leaf_nodes1 == leaf_nodes2
+        leaf_values1 = get_leaf_values(root1)
+        leaf_values2 = get_leaf_values(root2)
+        
+        return leaf_values1 == leaf_values2
