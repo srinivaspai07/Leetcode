@@ -7,13 +7,18 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        # Base case: If root is None or if root is either p or q, return root
-        if not root or root == p or root == q:
+        
+        if not root:
+            return None #not really needed as problem says all nodes are present
+        
+        # Base case: if root is either p or q, return root
+        if  (root == p or root == q):
             return root
         
         # Recur on left and right subtrees
         left_lca = self.lowestCommonAncestor(root.left, p, q)
         right_lca = self.lowestCommonAncestor(root.right, p, q)
+        
         
         # If both left and right subtrees return non-None values, then root is the LCA
         if left_lca and right_lca:
