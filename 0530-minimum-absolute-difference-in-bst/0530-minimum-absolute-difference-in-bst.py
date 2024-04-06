@@ -18,7 +18,6 @@ class Solution:
                 min_diff = min(min_diff, abs(node.val - prev))
 
             prev = node.val
-            print(prev)
             min_diff, prev = inorder_traversal(node.right, prev, min_diff)
             
             return min_diff, prev
