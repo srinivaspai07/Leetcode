@@ -1,43 +1,27 @@
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
-        """
-        Do not return anything, modify board in-place instead.
-        """
-        if not board:
-            return
-        
-        rows, cols = len(board), len(board[0])
-        
-        def dfs(row, col):
-            if row < 0 or row >= rows or col < 0 or col >= cols or board[row][col] != 'O':
+        ROWS, COLS = len(board), len(board[0])
+
+        def capture(r, c):
+
+            print(f"row is {r} and col is {c}")
+            if r < 0 or c < 0 or r == ROWS or c == COLS or board[r][c] != "O":
                 return
-            
-            board[row][col] = '#'  # Mark as visited
-            
-            # Explore 4 directions
-            dfs(row + 1, col)
-            dfs(row - 1, col)
-            dfs(row, col + 1)
-            dfs(row, col - 1)
-        
-        # Traverse first and last rows
-        for col in range(cols):
-            if board[0][col] == 'O':
-                dfs(0, col)
-            if board[rows - 1][col] == 'O':
-                dfs(rows - 1, col)
-        
-        # Traverse first and last columns
-        for row in range(rows):
-            if board[row][0] == 'O':
-                dfs(row, 0)
-            if board[row][cols - 1] == 'O':
-                dfs(row, cols - 1)
-        
-        # Flip 'O's to 'X's and revert '#' back to 'O's
-        for row in range(rows):
-            for col in range(cols):
-                if board[row][col] == 'O':
-                    board[row][col] = 'X'
-                elif board[row][col] == '#':
-                    board[row][col] = 'O'
+            board[r][c] = "T"
+            capture(r + 1, c)
+            capture(r - 1, c)
+            capture(r, c + 1)
+            capture(r, c - 1)
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                if board[r][c] == "O" and (r in [0, ROWS - 1] or c in [0, COLS - 1]):
+                    capture(r, c)
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                if board[r][c] == "O":
+                    board[r][c] = "X"
+                if board[r][c] == "T":
+                    board[r][c] = "O"                
+
