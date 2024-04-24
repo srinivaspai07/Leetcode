@@ -16,7 +16,7 @@ class Solution:
         return dp[n-1]
         
 """
-
+top down approach (memoization)
 class Solution:
     def climbStairs(self, n: int) -> int:
         def dp(i):
