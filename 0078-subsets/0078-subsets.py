@@ -1,6 +1,8 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         def backtrack(first=0, curr=[]):
+            
+            print(f"k is {k}")
             # If the combination is done
             if len(curr) == k:
                 output.append(curr[:])
