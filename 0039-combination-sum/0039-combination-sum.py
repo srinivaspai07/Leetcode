@@ -1,18 +1,27 @@
+from typing import List
+
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        res = []
+        results = []
 
-        def dfs(i, cur, total):
-            if total == target:
-                res.append(cur.copy())
+        def backtrack(remain, comb, start):
+            if remain == 0:
+                # make a deep copy of the current combination
+                results.append(list(comb))
                 return
-            if i >= len(candidates) or total > target:
+            elif remain < 0:
+                # exceed the scope, stop exploration.
                 return
 
-            cur.append(candidates[i])
-            dfs(i, cur, total + candidates[i])
-            cur.pop()
-            dfs(i + 1, cur, total)
+            for num in candidates:
+                if num >= start:
+                    # add the number into the combination
+                    comb.append(num)
+                    # give the current number another chance, rather than moving on
+                    backtrack(remain - num, comb, num)
+                    # backtrack, remove the number from the combination
+                    comb.pop()
 
-        dfs(0, [], 0)
-        return res
+        backtrack(target, [], 0)
+
+        return results
