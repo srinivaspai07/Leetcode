@@ -1,7 +1,8 @@
-from typing import List
-
 class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+    def combinationSum(
+        self, candidates: List[int], target: int
+    ) -> List[List[int]]:
+
         results = []
 
         def backtrack(remain, comb, start):
@@ -13,15 +14,38 @@ class Solution:
                 # exceed the scope, stop exploration.
                 return
 
-            for num in candidates:
-                if num >= start:
-                    # add the number into the combination
-                    comb.append(num)
-                    # give the current number another chance, rather than moving on
-                    backtrack(remain - num, comb, num)
-                    # backtrack, remove the number from the combination
-                    comb.pop()
+            for i in range(start, len(candidates)):
+                # add the number into the combination
+                comb.append(candidates[i])
+                # give the current number another chance, rather than moving on
+                backtrack(remain - candidates[i], comb, i)
+                # backtrack, remove the number from the combination
+                comb.pop()
 
         backtrack(target, [], 0)
 
         return results
+"""
+NEETCODE
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+
+        def dfs(i, cur, total):
+            if total == target:
+                res.append(cur.copy())
+                return
+            if i >= len(candidates) or total > target:
+                return
+
+            cur.append(candidates[i])
+            print(f"initial {cur}")
+            dfs(i, cur, total + candidates[i])
+            cur.pop()
+            dfs(i + 1, cur, total)
+            print(f"second {cur}")
+        
+        dfs(0, [], 0)
+        return res
+
+"""
