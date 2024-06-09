@@ -6,6 +6,7 @@ class Solution:
         def backtrack(i):
 
             if i >=len(nums):
+                print(f"inside and i is {i} and cur is {cur}")
                 res.append(cur.copy())
                 return
             
