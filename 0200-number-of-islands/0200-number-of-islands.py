@@ -12,7 +12,6 @@ class Solution:
 
         def bfs(r, c):
             queue.append((r, c))
-            visited.add((r, c))
 
             while queue:
                 r, c = queue.popleft()
