@@ -6,16 +6,15 @@ class Solution:
 
         # DFS function to visit all cities in the same province
         def dfs(city):
+            visited.add(city)  # Mark as visited before exploring neighbors
             for neighbor in range(n):
                 if isConnected[city][neighbor] == 1 and neighbor not in visited:
-                    visited.add(neighbor)  # Mark as visited
                     dfs(neighbor)  # Recursively visit all its neighbors
 
         # Loop over all cities and run DFS for unvisited cities
         for city in range(n):
             if city not in visited:
-                visited.add(city)  # Mark city as visited
-                dfs(city)  # Visit all cities in this province
+                dfs(city)  # Visit all cities in this province using DFS
                 provinces += 1  # Count this as one province
 
         return provinces
