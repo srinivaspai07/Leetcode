@@ -1,33 +1,38 @@
+import collections
+
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        q = collections.deque()
-        fresh = 0
-        time = 0
 
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c] == 1:
-                    fresh += 1
-                if grid[r][c] == 2:
-                    q.append((r, c))
+        rows = len(grid)
+        cols = len(grid[0])
 
-        directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
-        while fresh > 0 and q:
-            length = len(q)
-            for i in range(length):
-                r, c = q.popleft()
+        freshOrange = 0
+        queue = collections.deque()
+        directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
+        # Step 1: Count fresh oranges and add all rotten oranges to the queue
+        for i in range(rows):
+            for j in range(cols):
+                if grid[i][j] == 1:
+                    freshOrange += 1  # Count fresh oranges
+                elif grid[i][j] == 2:
+                    queue.append((i, j))  # Add all initially rotten oranges to the queue
+
+        # Step 2: BFS to propagate the rotting process
+        minutes = 0
+        while queue and freshOrange > 0:
+            minutes += 1  # Increment time at the start of each minute
+            for _ in range(len(queue)):  # Process all rotten oranges at the current level
+                i, j = queue.popleft()
+                
                 for dr, dc in directions:
-                    row, col = r + dr, c + dc
-                    # if in bounds and nonrotten, make rotten
-                    # and add to q
-                    if (
-                        row in range(len(grid))
-                        and col in range(len(grid[0]))
-                        and grid[row][col] == 1
-                    ):
-                        grid[row][col] = 2
-                        q.append((row, col))
-                        fresh -= 1
-            time += 1
-        return time if fresh == 0 else -1
+                    newR, newC = i + dr, j + dc
+
+                    # Only process valid fresh oranges that can be turned rotten
+                    if 0 <= newR < rows and 0 <= newC < cols and grid[newR][newC] == 1:
+                        grid[newR][newC] = 2  # Turn fresh orange to rotten
+                        queue.append((newR, newC))  # Add the newly rotten orange to the queue
+                        freshOrange -= 1  # Decrease count of fresh oranges
+
+        # Step 3: Return the result, if all fresh oranges have rotted
+        return minutes if freshOrange == 0 else -1
