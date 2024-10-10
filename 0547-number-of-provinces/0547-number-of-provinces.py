@@ -19,3 +19,8 @@ class Solution:
                 provinces += 1  # Count this as one province
 
         return provinces
+
+    
+# this is a good problem
+# this is not a grid traversal problem
+# here, the graph is given as adjacency matrix and this problem teaches us how to traverse adjancy matrix
