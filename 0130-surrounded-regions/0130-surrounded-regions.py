@@ -4,8 +4,8 @@ class Solution:
 
         def capture(r, c):
 
-            print(f"row is {r} and col is {c}")
             if r < 0 or c < 0 or r == ROWS or c == COLS or board[r][c] != "O":
+
                 return
             board[r][c] = "T"
             capture(r + 1, c)
