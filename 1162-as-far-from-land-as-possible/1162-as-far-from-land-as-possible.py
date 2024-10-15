@@ -3,40 +3,39 @@ from collections import deque
 
 class Solution:
     def maxDistance(self, grid: List[List[int]]) -> int:
-        if not grid:
-            return -1
-        
-        rows, cols = len(grid), len(grid[0])
+        n = len(grid)
         queue = deque()
 
         # Add all land cells (1) to the queue initially
-        for row in range(rows):
-            for col in range(cols):
+        for row in range(n):
+            for col in range(n):
                 if grid[row][col] == 1:
-                    queue.append((row, col))
-        
+                    queue.append((row, col, 0))  # (row, col, distance)
+
         # If there are no water cells or no land cells, return -1
-        if len(queue) == 0 or len(queue) == rows * cols:
+        if not queue or len(queue) == n * n:
             return -1
 
         # Directions for moving up, down, left, and right
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        maxDistance = -1
+
+        max_distance = -1
 
         # Perform BFS from all land cells
         while queue:
-            row, col = queue.popleft()
+            row, col, dist = queue.popleft()
 
             # Explore all 4 directions
             for dr, dc in directions:
-                newR, newC = row + dr, col + dc
+                new_r, new_c = row + dr, col + dc
 
                 # If the new cell is valid and is water (0)
-                if 0 <= newR < rows and 0 <= newC < cols and grid[newR][newC] == 0:
-                    # Mark the water cell as visited by setting it to 1
-                    grid[newR][newC] = grid[row][col] + 1  # Propagate the distance
-                    queue.append((newR, newC))
+                if 0 <= new_r < n and 0 <= new_c < n and grid[new_r][new_c] == 0:
+                    # Mark the cell as visited by setting it to 1 (land)
+                    grid[new_r][new_c] = 1
+                    # Append the new cell with updated distance
+                    queue.append((new_r, new_c, dist + 1))
                     # Update the maximum distance encountered
-                    maxDistance = max(maxDistance, grid[newR][newC] - 1)
+                    max_distance = max(max_distance, dist + 1)
 
-        return maxDistance
+        return max_distance
