@@ -16,9 +16,9 @@ class Solution:
                 continue
             if value == 0:
                 queue.append(index)
-        print(inDegree)
-        print(adjList)
-        print(queue)
+        #print(inDegree)
+        #print(adjList)
+        #print(queue)
         
         while queue:
             
