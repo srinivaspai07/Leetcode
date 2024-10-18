@@ -3,6 +3,72 @@ from typing import List
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        
+        adjList = defaultdict(list)
+        inDegree = [0] * numCourses
+        queue = collections.deque()
+        results = []
+        
+        for u,v in prerequisites:
+            adjList[u].append(v)
+            inDegree[v] += 1
+        
+        if 0 not in inDegree:
+            print("bye")
+            return results   
+        
+        for index,value in enumerate(inDegree):
+            if value == 0:
+                queue.append(index)
+        
+        
+        while queue:
+            
+            crs = queue.popleft()
+            results.append(crs)
+            
+            for neighbour in adjList[crs]:
+                inDegree[neighbour] -= 1
+                if inDegree[neighbour] == 0:
+                    queue.append(neighbour)
+        
+        return results[::-1] if len(results) == numCourses else []
+            
+            
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+"""        
         # Step 1: Build the adjacency list and in-degree array
         adjacencyList = defaultdict(list)
         inDegree = [0] * numCourses
@@ -37,4 +103,6 @@ class Solution:
             return verticesVisited
         else:
             return []  # Cycle detected, return an empty list
+            
+"""
 
