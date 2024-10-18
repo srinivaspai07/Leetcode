@@ -19,9 +19,6 @@ class Solution:
             if inDegree[index] == 0:
                 queue.append(index)
         
-        print("Initial inDegree:", inDegree)
-        print("Initial adjList:", adjList)
-        print("Initial queue:", queue)
         
         # Track the number of courses we can process
         coursesProcessed = 0
