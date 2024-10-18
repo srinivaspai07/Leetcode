@@ -14,7 +14,6 @@ class Solution:
             inDegree[v] += 1
         
         if 0 not in inDegree:
-            print("bye")
             return results   
         
         for index,value in enumerate(inDegree):
