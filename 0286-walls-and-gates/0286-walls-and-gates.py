@@ -4,7 +4,84 @@ class Solution:
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
         if not rooms:
             return
+        
+        rows, cols = len(rooms), len(rooms[0])
+        queue = collections.deque()
+        
+        for i in range(rows):
+            for j in range(cols):
+                
+                if rooms[i][j] == 0:
+                    queue.append((i,j,0))
+        
+        directions = [[-1,0],[0,1],[1,0],[0,-1]]
+        visited = set()
+        
+        while queue:
+            
+            for _ in range(len(queue)):
+                
+                i,j,distance = queue.popleft()
+                
+                visited.add((i,j))
+                
+                if rooms[i][j] == 2147483647:
+                    rooms[i][j] = distance            
+        
+                for dr,dc in directions:
+            
+                    newR, newC = i + dr, j + dc
+            
+                    if 0 <= newR < rows and 0 <= newC < cols and rooms[newR][newC] == 2147483647 and (newR,newC) not in visited:
+                        queue.append((newR,newC,distance+1))
+        
+        return rooms
+                
+                
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+"""        
+        
+        
         rows = len(rooms)
         cols = len(rooms[0])
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
@@ -28,3 +105,4 @@ class Solution:
                     queue.append((new_row, new_col))
 
         return
+"""
