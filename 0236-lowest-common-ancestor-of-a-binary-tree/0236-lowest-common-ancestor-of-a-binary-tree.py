@@ -8,21 +8,22 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         
-        if not root:
-            return None #not really needed as problem says all nodes are present
+        # Define the dfs function
+        def dfs(node):
+            # Base case: If the current node is None, or matches p or q, return the node
+            if not node or node == p or node == q:
+                return node
+            
+            # Recur for the left and right subtrees
+            left = dfs(node.left)
+            right = dfs(node.right)
+            
+            # If both left and right are non-null, this node is the LCA
+            if left and right:
+                return node
+            
+            # If only one side has a non-null result, propagate that upwards
+            return left if left else right
         
-        # Base case: if root is either p or q, return root
-        if  (root == p or root == q):
-            return root
-        
-        # Recur on left and right subtrees
-        left_lca = self.lowestCommonAncestor(root.left, p, q)
-        right_lca = self.lowestCommonAncestor(root.right, p, q)
-        
-        
-        # If both left and right subtrees return non-None values, then root is the LCA
-        if left_lca and right_lca:
-            return root
-        
-        # If only one subtree returns a non-None value, return that value (potential LCA)
-        return left_lca if left_lca else right_lca
+        # Call the dfs function starting from the root
+        return dfs(root)
