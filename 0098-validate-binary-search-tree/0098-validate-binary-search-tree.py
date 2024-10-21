@@ -25,7 +25,7 @@ class Solution:
         return( check(root,float(-inf),float(inf)))
 
 """
-Alternatively:
+Alternatively: this is a better solution as it stops the recursion when we get False and propagates upwards
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
