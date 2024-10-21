@@ -13,6 +13,7 @@ class Solution:
         # In-order DFS function
         def inorder(node):
             if not node:
+                print(f"leaf node")
                 return
             
             # Traverse left subtree
@@ -20,8 +21,10 @@ class Solution:
             
             # Process current node
             if self.prev_val is not None:
+                print(f"computing diff abs {node.val}  {self.prev_val}")
                 self.min_diff = min(self.min_diff, abs(node.val - self.prev_val))
-            
+            if self.prev_val is not None:
+                print(f"prev val is {self.prev_val} and current val is {node.val} and min is {self.min_diff}")
             # Update previous node value
             self.prev_val = node.val
             
