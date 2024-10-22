@@ -11,8 +11,9 @@ class Solution:
             left_same = checkTree(p.left, q.left)
             right_same = checkTree(p.right, q.right)
             
+           
             if not left_same or not right_same:
                 return False
             return True
-
+            
         return checkTree(p, q)
