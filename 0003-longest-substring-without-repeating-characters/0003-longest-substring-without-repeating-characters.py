@@ -1,31 +1,9 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-
-        
-        l , r = 0 , 0
-        longest = set()
-        maximum = 0
-        
-        for _ in range(len(s)):
-            
-            if s[r] in longest:        
-                while s[r] in longest:
-                    longest.remove(s[l])
-                    l += 1
-            longest.add(s[r])
-            r += 1
-        
-            
-            maximum = max(maximum,r-l)
-        
-        return maximum
-                    
-            
+     
         
         
         
-        
-"""        
         l = 0  # Left pointer of the sliding window
         longest = 0  # Length of the longest substring
         substr = set()  # Set to store characters in the current substring
@@ -44,4 +22,3 @@ class Solution:
             longest = max(longest, r - l + 1)
         
         return longest
-"""
