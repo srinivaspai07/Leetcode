@@ -27,3 +27,32 @@ class Solution:
             i +=1
 
         return f
+   
+
+# this is a better cleaner solution from chatpgt....
+
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        words = s.split()  # Split the string into words
+        if len(pattern) != len(words):  # Lengths must match
+            return False
+
+        char_to_word = {}
+        word_to_char = {}
+
+        for char, word in zip(pattern, words):
+            # Check if the pattern character maps to the current word
+            if char in char_to_word:
+                if char_to_word[char] != word:
+                    return False
+            else:
+                char_to_word[char] = word
+
+            # Check if the word maps to the current pattern character
+            if word in word_to_char:
+                if word_to_char[word] != char:
+                    return False
+            else:
+                word_to_char[word] = char
+
+        return True
