@@ -9,7 +9,6 @@ class Solution:
         dummy = ListNode()
         # Initialize current pointer
         current = dummy
-        print(type(current))
         
         # Merge lists
         while list1 and list2:
