@@ -8,7 +8,7 @@ class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
 
         carry = 0
-        dummy = ListNode(0)
+        
         newList = ListNode(0)
         dummy = newList
         
