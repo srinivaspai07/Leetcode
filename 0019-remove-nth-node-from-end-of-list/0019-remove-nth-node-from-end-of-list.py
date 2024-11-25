@@ -7,14 +7,13 @@ class Solution:
         
         # Move the second pointer ahead by n+1 steps
         for _ in range(n + 1):
-            print(second.val)
             second = second.next
-        
         # Move first and second pointers simultaneously until second reaches the end
         while second:
             first = first.next
             second = second.next
         
+        print(first.val)
         # Remove the nth node from the end
         first.next = first.next.next
         
