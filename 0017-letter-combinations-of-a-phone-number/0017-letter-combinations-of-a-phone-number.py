@@ -17,9 +17,11 @@ class Solution:
             if len(curStr) == len(digits):
                 res.append(curStr)
                 return
-            
             for char in digitToChar[digits[i]]:
+                print(f"it is {i} and {char}")
+
                 backtrack(i+1,curStr+char)
+
         
        
         
